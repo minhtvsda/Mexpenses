@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.mexpenses.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/editorFragment"
+        android:name="com.example.mexpenses.EditorFragment"
+        android:label="fragment_editor"
+        tools:layout="@layout/fragment_editor" />
+    <fragment
+        android:id="@+id/expenseFragment"
+        android:name="com.example.mexpenses.ExpenseFragment"
+        android:label="fragment_expense"
+        tools:layout="@layout/fragment_expense" />
+    <fragment
+        android:id="@+id/editorexFragment"
+        android:name="com.example.mexpenses.EditorexFragment"
+        android:label="fragment_editorex"
+        tools:layout="@layout/fragment_editorex" />
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.example.mexpenses.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" />
+    <fragment
+        android:id="@+id/verifyFragment"
+        android:name="com.example.mexpenses.VerifyFragment"
+        android:label="fragment_verify"
+        tools:layout="@layout/fragment_verify" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.mexpenses.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.mexpenses.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" />
+
+
+</navigation>
