@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -64,6 +65,7 @@ public class MainFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        Log.e("Message", "onCreateView");
 
         // an action bar
         AppCompatActivity aca = (AppCompatActivity) getActivity();
@@ -193,6 +195,13 @@ public class MainFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
+        Log.e("Message", "onResume");
         mViewModel.getData();
     }
+
+    public static void main(String[] args) {
+
+    }
+
+
 }
