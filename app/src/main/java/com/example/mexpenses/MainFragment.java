@@ -79,7 +79,7 @@ public class MainFragment extends Fragment
         mViewModel.setDatabase(db);
 
         binding = FragmentMainBinding.inflate(inflater,container,false);
-//        return inflater.inflate(R.layout.fragment_main, container, false);
+
         RecyclerView rv = binding.recyclerView;
         rv.setHasFixedSize(true);
         rv.addItemDecoration(new DividerItemDecoration(

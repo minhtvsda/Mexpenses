@@ -56,6 +56,8 @@ public class ProfileFragment extends Fragment {
             Toast.makeText(getContext(), "Successful!", Toast.LENGTH_SHORT).show();
             Navigation.findNavController(getView()).navigate(R.id.signInFragment);
         });
+        binding.backToMain.setOnClickListener(view -> Navigation.findNavController(getView()).navigateUp());
+
         return binding.getRoot();
     }
     private void openGallery() {

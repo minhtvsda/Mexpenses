@@ -114,6 +114,8 @@ public class EditorFragment extends Fragment {
         mViewModel.getTripByID(tripId);
         //Sau đó ta lấy dữ liệu thay đổi.
 
+        binding.backButton.setOnClickListener(view -> Navigation.findNavController(getView()).navigateUp());
+
         List<String> tripName = Arrays.asList("Select trip","Client Meeting", "Android Conference", "Food", "Woman", "Other");
 
         ArrayAdapter aa = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, tripName);
@@ -164,12 +166,12 @@ public class EditorFragment extends Fragment {
                     etDate.setText(date);
                     Toast.makeText(getContext(),"Select date successfully!", Toast.LENGTH_LONG).show();
                 }
-                }
-                ,year, month, day);
+            }
+                    ,year, month, day);
             datePickerDialog.show();
         });
 
-            binding.showExpense.setOnClickListener(v -> this.showExpense(tripId));
+        binding.showExpense.setOnClickListener(v -> this.showExpense(tripId));
         if (tripId == 0){
             binding.showExpense.setVisibility(View.INVISIBLE);
         }
@@ -202,7 +204,7 @@ public class EditorFragment extends Fragment {
         super.onPrepareOptionsMenu(menu);
         TripEntity t = mViewModel.trip.getValue();
         if ( t != null
-            && t.getId() == 0){     //neu id = 0
+                && t.getId() == 0){     //neu id = 0
             menu.findItem(R.id.action_delete).setVisible(false);
         }
     }
@@ -218,14 +220,14 @@ public class EditorFragment extends Fragment {
         //kiem tra xem item nao dc an
         switch (item.getItemId()){
             case android.R.id.home:
-                if (this.validate()) return savethenReturn();
-                        else return false;
+                if (this.validate()) return showDialogSave();
+                else return false;
             case R.id.action_delete:
                 return deletethenReturn();
 
             default: return super.onOptionsItemSelected(item);
+        }
     }
-}
 
     private boolean validate() {
         EditText name = binding.name;
@@ -250,7 +252,7 @@ public class EditorFragment extends Fragment {
         }
 
         if(!risk.getText().toString().trim().equals("Yes")
-            && !risk.getText().toString().trim().equals("No")) {
+                && !risk.getText().toString().trim().equals("No")) {
             risk.setError("You must choose Yes or No for Risk!!!");
             Validated = false;
         }
@@ -282,9 +284,29 @@ public class EditorFragment extends Fragment {
         dialog.show();
         return true;
     }
+    boolean showDialogSave() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+        dialog.setTitle("Save trip");
+        dialog.setMessage("Are you sure?");
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        dialog.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                savethenReturn();
+            }
+        });
+        dialog.show();
+        return true;
+    }
 
     private boolean savethenReturn() {
         Log.i(this.getClass().getName(), "save then return");
+
 //log la qua trinh ghe thong chay
         ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.show();
@@ -359,4 +381,4 @@ public class EditorFragment extends Fragment {
         }
 
     }
-    }
+}

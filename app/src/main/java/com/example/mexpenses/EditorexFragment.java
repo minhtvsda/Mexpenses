@@ -4,7 +4,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -63,6 +65,7 @@ public class EditorexFragment extends Fragment {
         mViewModel.setDatabase(db);
 
         binding = FragmentEditorexBinding.inflate(inflater, container, false);
+        binding.backButton.setOnClickListener(view -> Navigation.findNavController(getView()).navigateUp());
 
         int expenseId = getArguments().getInt("expenseId");
 
@@ -135,7 +138,7 @@ public class EditorexFragment extends Fragment {
         switch (item.getItemId()){
             case android.R.id.home:
                 if (this.validate())
-                return savethenReturn();
+                return showDialogSave();
                         else return false;
             case R.id.action_delete:
                 return deletethenReturn();
@@ -164,6 +167,26 @@ public class EditorexFragment extends Fragment {
         mViewModel.deleteExpense();
         Navigation.findNavController(getView()).navigateUp();
         Toast.makeText(getContext(), "Delete successfully!!!", Toast.LENGTH_LONG).show();
+        return true;
+    }
+
+    boolean showDialogSave() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+        dialog.setTitle("Save expense?");
+        dialog.setMessage("Are you sure?");
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        dialog.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                savethenReturn();
+            }
+        });
+        dialog.show();
         return true;
     }
 
